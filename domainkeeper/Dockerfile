@@ -1,0 +1,6 @@
+FROM python:3.11-rc-alpine
+
+RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \ 
+    pip install requests
+WORKDIR /app
+ADD keeper.py .

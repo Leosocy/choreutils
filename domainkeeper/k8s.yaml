@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: domainkeeper
+  namespace: choreutils
+spec:
+  schedule: "*/15 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: app
+            image: leosocy/domainkeeper
+            args: ['python', 'keeper.py']
+            env:
+              - name: DOMAINS
+                value: "http://1.leosocy.top"
+          restartPolicy: OnFailure
